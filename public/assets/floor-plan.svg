@@ -1,0 +1,110 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#f8f9fa"/>
+  
+  <!-- Grid lines -->
+  <defs>
+    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#e9ecef" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="600" fill="url(#grid)"/>
+  
+  <!-- Main building outline -->
+  <rect x="100" y="100" width="600" height="400" fill="none" stroke="#343a40" stroke-width="3"/>
+  
+  <!-- Room divisions -->
+  <!-- Living Room -->
+  <rect x="100" y="100" width="300" height="200" fill="none" stroke="#6c757d" stroke-width="2"/>
+  <text x="250" y="210" text-anchor="middle" font-family="Arial" font-size="16" fill="#495057">Living Room</text>
+  
+  <!-- Kitchen -->
+  <rect x="400" y="100" width="200" height="150" fill="none" stroke="#6c757d" stroke-width="2"/>
+  <text x="500" y="180" text-anchor="middle" font-family="Arial" font-size="14" fill="#495057">Kitchen</text>
+  
+  <!-- Bedroom 1 -->
+  <rect x="600" y="100" width="100" height="150" fill="none" stroke="#6c757d" stroke-width="2"/>
+  <text x="650" y="180" text-anchor="middle" font-family="Arial" font-size="12" fill="#495057">Bedroom 1</text>
+  
+  <!-- Bedroom 2 -->
+  <rect x="600" y="250" width="100" height="150" fill="none" stroke="#6c757d" stroke-width="2"/>
+  <text x="650" y="330" text-anchor="middle" font-family="Arial" font-size="12" fill="#495057">Bedroom 2</text>
+  
+  <!-- Bathroom -->
+  <rect x="400" y="250" width="100" height="100" fill="none" stroke="#6c757d" stroke-width="2"/>
+  <text x="450" y="305" text-anchor="middle" font-family="Arial" font-size="12" fill="#495057">Bath</text>
+  
+  <!-- Utility Room -->
+  <rect x="500" y="250" width="100" height="100" fill="none" stroke="#6c757d" stroke-width="2"/>
+  <text x="550" y="305" text-anchor="middle" font-family="Arial" font-size="12" fill="#495057">Utility</text>
+  
+  <!-- Hallway -->
+  <rect x="100" y="300" width="300" height="100" fill="none" stroke="#6c757d" stroke-width="2"/>
+  <text x="250" y="355" text-anchor="middle" font-family="Arial" font-size="14" fill="#495057">Hallway</text>
+  
+  <!-- Garage -->
+  <rect x="100" y="400" width="200" height="100" fill="none" stroke="#6c757d" stroke-width="2"/>
+  <text x="200" y="455" text-anchor="middle" font-family="Arial" font-size="14" fill="#495057">Garage</text>
+  
+  <!-- Storage -->
+  <rect x="300" y="400" width="100" height="100" fill="none" stroke="#6c757d" stroke-width="2"/>
+  <text x="350" y="455" text-anchor="middle" font-family="Arial" font-size="12" fill="#495057">Storage</text>
+  
+  <!-- Patio -->
+  <rect x="400" y="400" width="300" height="100" fill="none" stroke="#6c757d" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="550" y="455" text-anchor="middle" font-family="Arial" font-size="14" fill="#495057">Patio</text>
+  
+  <!-- Doors -->
+  <line x1="300" y1="100" x2="300" y2="120" stroke="#dc3545" stroke-width="3"/>
+  <line x1="400" y1="170" x2="420" y2="170" stroke="#dc3545" stroke-width="3"/>
+  <line x1="600" y1="200" x2="620" y2="200" stroke="#dc3545" stroke-width="3"/>
+  <line x1="450" y1="250" x2="450" y2="270" stroke="#dc3545" stroke-width="3"/>
+  <line x1="200" y1="400" x2="200" y2="420" stroke="#dc3545" stroke-width="3"/>
+  
+  <!-- Windows -->
+  <rect x="95" y="150" width="10" height="50" fill="#17a2b8"/>
+  <rect x="95" y="250" width="10" height="50" fill="#17a2b8"/>
+  <rect x="350" y="95" width="50" height="10" fill="#17a2b8"/>
+  <rect x="650" y="95" width="50" height="10" fill="#17a2b8"/>
+  <rect x="695" y="300" width="10" height="50" fill="#17a2b8"/>
+  <rect x="500" y="495" width="100" height="10" fill="#17a2b8"/>
+  
+  <!-- Electrical outlets -->
+  <circle cx="150" cy="130" r="3" fill="#ffc107"/>
+  <circle cx="350" cy="130" r="3" fill="#ffc107"/>
+  <circle cx="450" cy="130" r="3" fill="#ffc107"/>
+  <circle cx="550" cy="130" r="3" fill="#ffc107"/>
+  <circle cx="650" cy="130" r="3" fill="#ffc107"/>
+  <circle cx="650" cy="280" r="3" fill="#ffc107"/>
+  <circle cx="450" cy="280" r="3" fill="#ffc107"/>
+  <circle cx="150" cy="330" r="3" fill="#ffc107"/>
+  <circle cx="150" cy="430" r="3" fill="#ffc107"/>
+  <circle cx="350" cy="430" r="3" fill="#ffc107"/>
+  <circle cx="550" cy="430" r="3" fill="#ffc107"/>
+  
+  <!-- Light fixtures -->
+  <circle cx="250" cy="200" r="4" fill="#28a745" stroke="#198754" stroke-width="2"/>
+  <circle cx="500" cy="175" r="4" fill="#28a745" stroke="#198754" stroke-width="2"/>
+  <circle cx="650" cy="175" r="4" fill="#28a745" stroke="#198754" stroke-width="2"/>
+  <circle cx="650" cy="325" r="4" fill="#28a745" stroke="#198754" stroke-width="2"/>
+  <circle cx="450" cy="300" r="4" fill="#28a745" stroke="#198754" stroke-width="2"/>
+  <circle cx="250" cy="350" r="4" fill="#28a745" stroke="#198754" stroke-width="2"/>
+  <circle cx="200" cy="450" r="4" fill="#28a745" stroke="#198754" stroke-width="2"/>
+  <circle cx="550" cy="450" r="4" fill="#28a745" stroke="#198754" stroke-width="2"/>
+  
+  <!-- Legend -->
+  <rect x="50" y="520" width="200" height="70" fill="white" stroke="#6c757d" stroke-width="1"/>
+  <text x="60" y="535" font-family="Arial" font-size="12" font-weight="bold" fill="#343a40">Legend:</text>
+  <line x1="60" y1="545" x2="80" y2="545" stroke="#dc3545" stroke-width="3"/>
+  <text x="85" y="549" font-family="Arial" font-size="10" fill="#495057">Doors</text>
+  <rect x="60" y="555" width="15" height="5" fill="#17a2b8"/>
+  <text x="80" y="563" font-family="Arial" font-size="10" fill="#495057">Windows</text>
+  <circle cx="67" cy="572" r="3" fill="#ffc107"/>
+  <text x="75" y="576" font-family="Arial" font-size="10" fill="#495057">Outlets</text>
+  <circle cx="125" cy="572" r="3" fill="#28a745"/>
+  <text x="133" y="576" font-family="Arial" font-size="10" fill="#495057">Lights</text>
+  
+  <!-- Title -->
+  <text x="400" y="40" text-anchor="middle" font-family="Arial" font-size="20" font-weight="bold" fill="#343a40">Sample Floor Plan</text>
+  <text x="400" y="60" text-anchor="middle" font-family="Arial" font-size="14" fill="#6c757d">Click anywhere to place construction tasks</text>
+</svg>

@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  construction-tasks-app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - app-network
+    volumes:
+      # Optional: Mount for custom nginx config
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.construction-tasks.rule=Host(`localhost`)"
+      - "traefik.http.services.construction-tasks.loadbalancer.server.port=80"
+
+networks:
+  app-network:
+    driver: bridge
+
+# Optional: Add a development service
+  construction-tasks-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3001:3000"
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm start
+    profiles:
+      - dev
+    networks:
+      - app-network
