@@ -35,20 +35,17 @@ const FloorPlanView: React.FC<FloorPlanViewProps> = ({
     title: '',
   }), []);
 
-  // Memoize positioned tasks to prevent unnecessary re-renders
   const positionedTasks = useMemo(() => 
     tasks.filter(task => task.position), 
     [tasks]
   );
 
-  // Memoize click handler to prevent re-creating on every render
   const handleImageClick = useCallback((e: React.MouseEvent<HTMLImageElement>, values: QuickTaskFormValues, resetForm: () => void) => {
     onTaskCreate(e, values, resetForm);
   }, [onTaskCreate]);
 
   return (
     <div className="flex-1 flex flex-col bg-white shadow-sm overflow-hidden">
-      {/* Floor Plan Header */}
       <div className="flex-shrink-0 p-6 border-b border-slate-200 bg-gradient-to-r from-white to-slate-50">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 bg-blue-100 rounded-lg">
@@ -60,48 +57,49 @@ const FloorPlanView: React.FC<FloorPlanViewProps> = ({
           </div>
         </div>
         
-        {/* Task Creation Form */}
         <Formik
           initialValues={initialValues}
           validationSchema={quickTaskSchema}
-          onSubmit={() => {}} // Handled by image click
+          onSubmit={() => {}} 
         >
           {({ values, resetForm, isValid, dirty }) => (
             <Form>
-              <div className="flex space-x-3 items-start">
-                <div className="flex-1 relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Plus className="h-4 w-4 text-slate-400" />
+              <div className="space-y-2">
+                <div className="flex space-x-3 items-start">
+                  <div className="flex-1 relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <Plus className="h-4 w-4 text-slate-400" />
+                    </div>
+                    <Field
+                      name="title"
+                      type="text"
+                      placeholder="Enter task title, then click on floor plan to place it..."
+                      className="w-full pl-10 pr-4 py-3 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white shadow-sm"
+                      disabled={isCreating}
+                    />
                   </div>
-                  <Field
-                    name="title"
-                    type="text"
-                    placeholder="Enter task title, then click on floor plan to place it..."
-                    className="w-full pl-10 pr-4 py-3 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white shadow-sm"
-                    disabled={isCreating}
-                  />
-                  <ErrorMessage name="title">
-                    {(errorMessage) => (
-                      <div className="mt-2 text-xs text-red-600 flex items-center gap-1">
-                        <AlertCircle className="w-3 h-3" />
-                        {errorMessage}
-                      </div>
-                    )}
-                  </ErrorMessage>
+                  <Button
+                    type="button"
+                    onClick={() => resetForm()}
+                    disabled={!dirty || isCreating}
+                    variant="secondary"
+                    icon={X}
+                    size="lg"
+                    className="h-12 flex-shrink-0"
+                  >
+                    Clear
+                  </Button>
                 </div>
-                <Button
-                  type="button"
-                  onClick={() => resetForm()}
-                  disabled={!dirty || isCreating}
-                  variant="secondary"
-                  icon={X}
-                  size="md"
-                >
-                  Clear
-                </Button>
+                <ErrorMessage name="title">
+                  {(errorMessage) => (
+                    <div className="text-xs text-red-600 flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3 flex-shrink-0" />
+                      {errorMessage}
+                    </div>
+                  )}
+                </ErrorMessage>
               </div>
 
-              {/* Floor Plan Container */}
               <div className="mt-6 relative">
                 <div className={`relative rounded-xl border-2 transition-all duration-200 ${
                   isValid && dirty && !isCreating
@@ -130,7 +128,6 @@ const FloorPlanView: React.FC<FloorPlanViewProps> = ({
                     </div>
                   )}
 
-                  {/* Task Markers */}
                   {positionedTasks.map((task) => (
                     <TaskMarker
                       key={task.id}
@@ -143,7 +140,6 @@ const FloorPlanView: React.FC<FloorPlanViewProps> = ({
                     />
                   ))}
 
-                  {/* Loading Overlay */}
                   {isCreating && (
                     <div className="absolute inset-0 bg-slate-900 bg-opacity-30 flex items-center justify-center rounded-xl backdrop-blur-sm">
                       <Card padding="md" shadow="lg">
@@ -161,9 +157,7 @@ const FloorPlanView: React.FC<FloorPlanViewProps> = ({
         </Formik>
       </div>
 
-      {/* Scrollable Floor Plan Content */}
       <div className="flex-1 overflow-y-auto min-h-0">
-        {/* Legend */}
         <FloorPlanLegend />
       </div>
     </div>

@@ -3,6 +3,7 @@ import { useTaskStore } from '../store/taskStore';
 import { addTask, updateTask, deleteTask } from '../db/db';
 import { TaskFormValues } from '../validation/schemas';
 import { ChecklistItem } from '../db/schema';
+import { CHECKLIST_STATUS } from '../constants/status';
 import { v4 as uuidv4 } from 'uuid';
 
 export const useTaskOperations = () => {
@@ -34,7 +35,7 @@ export const useTaskOperations = () => {
       const processedChecklist: ChecklistItem[] = (values.checklist || []).map((item: any) => ({
         id: item.id || uuidv4(),
         text: String(item.text || ''),
-        status: item.status || 'NOT_STARTED',
+        status: item.status || CHECKLIST_STATUS.NOT_STARTED,
         createdAt: item.createdAt || new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       }));
@@ -44,7 +45,7 @@ export const useTaskOperations = () => {
         description: values.description ? String(values.description) : undefined,
         checklist: processedChecklist,
         updatedAt: new Date().toISOString(),
-        isBlocked: processedChecklist.some(item => item.status === 'BLOCKED'),
+        isBlocked: processedChecklist.some(item => item.status === CHECKLIST_STATUS.BLOCKED),
       };
 
       await updateTask(taskId, updates);

@@ -7,7 +7,6 @@ import {
   Target, 
   Eye, 
   EyeOff, 
-  Settings, 
   LogOut 
 } from 'lucide-react';
 import Button from '../ui/Button';
@@ -49,13 +48,11 @@ const PlanHeader: React.FC<PlanHeaderProps> = ({
           </div>
           
           <div className="flex items-center space-x-4">
-            {/* User Info */}
             <div className="flex items-center space-x-2 px-3 py-2 bg-slate-50 rounded-lg border">
               <Users className="w-4 h-4 text-slate-500" />
               <span className="text-sm font-medium text-slate-700">{currentUser?.name}</span>
             </div>
             
-            {/* Toggle Tasks Panel */}
             <Button
               onClick={onToggleTaskList}
               icon={showTaskList ? EyeOff : Eye}
@@ -64,16 +61,6 @@ const PlanHeader: React.FC<PlanHeaderProps> = ({
               {showTaskList ? 'Hide Tasks' : 'Show Tasks'}
             </Button>
             
-            {/* Settings Button */}
-            <button
-              onClick={() => {/* Add settings functionality */}}
-              className="p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors"
-              title="Settings"
-            >
-              <Settings className="w-5 h-5" />
-            </button>
-            
-            {/* Logout Button */}
             <Button
               onClick={handleLogout}
               variant="ghost"

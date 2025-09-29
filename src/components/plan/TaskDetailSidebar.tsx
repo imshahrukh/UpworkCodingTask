@@ -27,7 +27,7 @@ const TaskDetailSidebar: React.FC<TaskDetailSidebarProps> = ({
   }
 
   return (
-    <div className="w-96 bg-white border-l border-slate-200 flex flex-col shadow-sm max-h-screen">
+    <div className="w-96 bg-white border-l border-slate-200 flex flex-col shadow-sm h-screen">
       <TaskDetailHeader
         task={selectedTask}
         isEditing={isEditing}

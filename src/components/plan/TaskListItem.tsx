@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import { TaskDoc } from '../../db/schema';
-import { getTaskStatus, getTaskProgress } from '../../utils/taskHelpers';
+import { getTaskStatus, getTaskProgress, getStatusText } from '../../utils/taskHelpers';
 import { 
   MapPin, 
   ClipboardList, 
@@ -33,12 +33,7 @@ const TaskListItem = forwardRef<HTMLDivElement, TaskListItemProps>(({
   };
 
   const getBadgeText = () => {
-    switch (status) {
-      case 'blocked': return 'Blocked';
-      case 'completed': return 'Complete';
-      case 'in-progress': return `${task.checklist.filter(item => item.status === 'DONE').length}/${task.checklist.length}`;
-      default: return 'Not Started';
-    }
+    return getStatusText(task);
   };
 
   return (
@@ -57,13 +52,13 @@ const TaskListItem = forwardRef<HTMLDivElement, TaskListItemProps>(({
             {task.title}
           </h3>
           {task.position && (
-            <div className="flex items-center gap-1 mt-1">
-              <MapPin className="w-3 h-3 text-slate-400" />
+            <div className="flex items-center gap-1.5 mt-1.5">
+              <MapPin className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
               <span className="text-xs text-slate-500">Positioned</span>
             </div>
           )}
         </div>
-        <div className="flex-shrink-0">
+        <div className="flex-shrink-0 ml-3">
           <Badge variant={getBadgeVariant()}>
             {getBadgeText()}
           </Badge>
@@ -77,18 +72,18 @@ const TaskListItem = forwardRef<HTMLDivElement, TaskListItemProps>(({
       )}
       
       <div className="flex items-center justify-between text-xs">
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1 text-slate-500">
-            <ClipboardList className="w-3 h-3" />
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-1.5 text-slate-500">
+            <ClipboardList className="w-3.5 h-3.5 flex-shrink-0" />
             <span>{task.checklist.length} items</span>
           </div>
-          <div className="flex items-center gap-1 text-slate-500">
-            <Calendar className="w-3 h-3" />
+          <div className="flex items-center gap-1.5 text-slate-500">
+            <Calendar className="w-3.5 h-3.5 flex-shrink-0" />
             <span>{new Date(task.createdAt).toLocaleDateString()}</span>
           </div>
         </div>
-        <div className="flex items-center gap-1">
-          <TrendingUp className="w-3 h-3 text-blue-500" />
+        <div className="flex items-center gap-1.5">
+          <TrendingUp className="w-3.5 h-3.5 text-blue-500 flex-shrink-0" />
           <span className="text-slate-600 font-medium">{progress}%</span>
         </div>
       </div>

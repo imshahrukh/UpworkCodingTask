@@ -1,5 +1,6 @@
 import React from 'react';
 import { LucideIcon } from 'lucide-react';
+import { BADGE_VARIANTS, BADGE_SIZES, BADGE_ICON_SIZES } from '../../constants/ui';
 
 export interface BadgeProps {
   children: React.ReactNode;
@@ -18,29 +19,15 @@ const Badge: React.FC<BadgeProps> = ({
 }) => {
   const baseClasses = 'inline-flex items-center gap-1 rounded-full font-medium border';
   
-  const variantClasses = {
-    default: 'bg-gray-50 text-gray-700 border-gray-200',
-    success: 'bg-green-50 text-green-700 border-green-200',
-    warning: 'bg-yellow-50 text-yellow-700 border-yellow-200',
-    danger: 'bg-red-50 text-red-700 border-red-200',
-    info: 'bg-blue-50 text-blue-700 border-blue-200'
-  };
+  const variantClasses = BADGE_VARIANTS[variant];
+  const sizeClasses = BADGE_SIZES[size];
+  const iconSizeClass = BADGE_ICON_SIZES[size];
 
-  const sizeClasses = {
-    sm: 'px-2 py-0.5 text-xs',
-    md: 'px-2.5 py-1 text-xs'
-  };
-
-  const iconSizeClasses = {
-    sm: 'w-3 h-3',
-    md: 'w-3 h-3'
-  };
-
-  const classes = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`.trim();
+  const classes = `${baseClasses} ${variantClasses} ${sizeClasses} ${className}`.trim();
 
   return (
     <span className={classes}>
-      {Icon && <Icon className={iconSizeClasses[size]} />}
+      {Icon && <Icon className={iconSizeClass} />}
       {children}
     </span>
   );

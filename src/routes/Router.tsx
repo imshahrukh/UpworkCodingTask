@@ -2,9 +2,35 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from '../components/Login';
 import PlanView from '../components/PlanView';
-import TaskBoard from '../components/TaskBoard';
-import TaskForm from '../components/TaskForm';
 import { useUserStore } from '../store/userStore';
+
+// Route configuration object
+const ROUTES_CONFIG = {
+  public: [
+    {
+      path: '/login',
+      component: Login,
+      exact: true
+    }
+  ],
+  protected: [
+    {
+      path: '/plan',
+      component: PlanView,
+      exact: true
+    }
+  ],
+  redirects: [
+    {
+      from: '/',
+      to: (currentUser: any) => currentUser ? '/plan' : '/login'
+    },
+    {
+      from: '*',
+      to: '/login'
+    }
+  ]
+};
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { currentUser } = useUserStore();
@@ -29,11 +55,9 @@ const PublicRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 const Router: React.FC = () => {
   const { currentUser } = useUserStore();
   
-  // Wait for Zustand persist to hydrate before rendering routes
   const [isHydrated, setIsHydrated] = React.useState(false);
   
   React.useEffect(() => {
-    // Small delay to ensure persistence has loaded
     const timer = setTimeout(() => setIsHydrated(true), 100);
     return () => clearTimeout(timer);
   }, []);
@@ -50,48 +74,44 @@ const Router: React.FC = () => {
     <BrowserRouter>
       <Routes>
         {/* Public Routes */}
-        <Route 
-          path="/login" 
-          element={
-            <PublicRoute>
-              <Login />
-            </PublicRoute>
-          } 
-        />
+        {ROUTES_CONFIG.public.map((route) => (
+          <Route
+            key={route.path}
+            path={route.path}
+            element={
+              <PublicRoute>
+                <route.component />
+              </PublicRoute>
+            }
+          />
+        ))}
         
         {/* Protected Routes */}
-        <Route 
-          path="/plan" 
-          element={
-            <ProtectedRoute>
-              <PlanView />
-            </ProtectedRoute>
-          } 
-        />
+        {ROUTES_CONFIG.protected.map((route) => (
+          <Route
+            key={route.path}
+            path={route.path}
+            element={
+              <ProtectedRoute>
+                <route.component />
+              </ProtectedRoute>
+            }
+          />
+        ))}
         
-        <Route 
-          path="/tasks" 
-          element={
-            <ProtectedRoute>
-              <TaskBoard />
-            </ProtectedRoute>
-          } 
-        />
-        
-        <Route 
-          path="/task/:id" 
-          element={
-            <ProtectedRoute>
-              <TaskForm />
-            </ProtectedRoute>
-          } 
-        />
-        
-        {/* Default redirect */}
-        <Route path="/" element={<Navigate to={currentUser ? "/plan" : "/login"} replace />} />
-        
-        {/* Catch all - redirect to login */}
-        <Route path="*" element={<Navigate to="/login" replace />} />
+        {/* Redirect Routes */}
+        {ROUTES_CONFIG.redirects.map((redirect, index) => (
+          <Route
+            key={`redirect-${index}`}
+            path={redirect.from}
+            element={
+              <Navigate 
+                to={typeof redirect.to === 'function' ? redirect.to(currentUser) : redirect.to} 
+                replace 
+              />
+            }
+          />
+        ))}
       </Routes>
     </BrowserRouter>
   );

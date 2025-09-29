@@ -1,15 +1,19 @@
 import * as yup from 'yup';
-import { ChecklistItemStatus } from '../db/schema';
+import { 
+  VALIDATION_LIMITS, 
+  ERROR_MESSAGES, 
+  CHECKLIST_STATUSES 
+} from '../constants/validation';
 
 // User validation schema
 export const userLoginSchema = yup.object({
   name: yup
     .string()
     .trim()
-    .required('Name is required')
-    .min(2, 'Name must be at least 2 characters')
-    .max(50, 'Name must not exceed 50 characters')
-    .matches(/^[a-zA-Z\s]+$/, 'Name can only contain letters and spaces'),
+    .required(ERROR_MESSAGES.NAME_REQUIRED)
+    .min(VALIDATION_LIMITS.USER_NAME.MIN_LENGTH, ERROR_MESSAGES.NAME_MIN_LENGTH)
+    .max(VALIDATION_LIMITS.USER_NAME.MAX_LENGTH, ERROR_MESSAGES.NAME_MAX_LENGTH)
+    .matches(VALIDATION_LIMITS.USER_NAME.PATTERN, ERROR_MESSAGES.NAME_PATTERN),
 });
 
 // Task validation schema
@@ -17,13 +21,13 @@ export const taskSchema = yup.object({
   title: yup
     .string()
     .trim()
-    .required('Task title is required')
-    .min(3, 'Title must be at least 3 characters')
-    .max(100, 'Title must not exceed 100 characters'),
+    .required(ERROR_MESSAGES.TITLE_REQUIRED)
+    .min(VALIDATION_LIMITS.TASK_TITLE.MIN_LENGTH, ERROR_MESSAGES.TITLE_MIN_LENGTH)
+    .max(VALIDATION_LIMITS.TASK_TITLE.MAX_LENGTH, ERROR_MESSAGES.TITLE_MAX_LENGTH),
   description: yup
     .string()
     .trim()
-    .max(500, 'Description must not exceed 500 characters')
+    .max(VALIDATION_LIMITS.TASK_DESCRIPTION.MAX_LENGTH, ERROR_MESSAGES.DESCRIPTION_MAX_LENGTH)
     .nullable(),
 });
 
@@ -32,16 +36,13 @@ export const checklistItemSchema = yup.object({
   text: yup
     .string()
     .trim()
-    .required('Checklist item text is required')
-    .min(1, 'Text must not be empty')
-    .max(200, 'Text must not exceed 200 characters'),
+    .required(ERROR_MESSAGES.CHECKLIST_ITEM_REQUIRED)
+    .min(VALIDATION_LIMITS.CHECKLIST_ITEM.MIN_LENGTH, ERROR_MESSAGES.CHECKLIST_ITEM_MIN_LENGTH)
+    .max(VALIDATION_LIMITS.CHECKLIST_ITEM.MAX_LENGTH, ERROR_MESSAGES.CHECKLIST_ITEM_MAX_LENGTH),
   status: yup
     .string()
-    .oneOf(
-      ['NOT_STARTED', 'IN_PROGRESS', 'BLOCKED', 'FINAL_CHECK_AWAITING', 'DONE'] as ChecklistItemStatus[],
-      'Invalid status'
-    )
-    .required('Status is required'),
+    .oneOf(CHECKLIST_STATUSES, ERROR_MESSAGES.STATUS_REQUIRED)
+    .required(ERROR_MESSAGES.STATUS_REQUIRED),
 });
 
 // Task form validation schema (includes checklist)
@@ -49,19 +50,19 @@ export const taskFormSchema = yup.object({
   title: yup
     .string()
     .trim()
-    .required('Task title is required')
-    .min(3, 'Title must be at least 3 characters')
-    .max(100, 'Title must not exceed 100 characters'),
+    .required(ERROR_MESSAGES.TITLE_REQUIRED)
+    .min(VALIDATION_LIMITS.TASK_TITLE.MIN_LENGTH, ERROR_MESSAGES.TITLE_MIN_LENGTH)
+    .max(VALIDATION_LIMITS.TASK_TITLE.MAX_LENGTH, ERROR_MESSAGES.TITLE_MAX_LENGTH),
   description: yup
     .string()
     .trim()
-    .max(500, 'Description must not exceed 500 characters')
+    .max(VALIDATION_LIMITS.TASK_DESCRIPTION.MAX_LENGTH, ERROR_MESSAGES.DESCRIPTION_MAX_LENGTH)
     .nullable(),
   checklist: yup
     .array()
     .of(checklistItemSchema)
-    .min(1, 'At least one checklist item is required')
-    .max(20, 'Maximum 20 checklist items allowed'),
+    .min(VALIDATION_LIMITS.CHECKLIST.MIN_ITEMS, ERROR_MESSAGES.CHECKLIST_MIN_ITEMS)
+    .max(VALIDATION_LIMITS.CHECKLIST.MAX_ITEMS, ERROR_MESSAGES.CHECKLIST_MAX_ITEMS),
 });
 
 // Quick task creation schema (for plan view)
@@ -69,9 +70,9 @@ export const quickTaskSchema = yup.object({
   title: yup
     .string()
     .trim()
-    .required('Task title is required')
-    .min(3, 'Title must be at least 3 characters')
-    .max(100, 'Title must not exceed 100 characters'),
+    .required(ERROR_MESSAGES.TITLE_REQUIRED)
+    .min(VALIDATION_LIMITS.TASK_TITLE.MIN_LENGTH, ERROR_MESSAGES.TITLE_MIN_LENGTH)
+    .max(VALIDATION_LIMITS.TASK_TITLE.MAX_LENGTH, ERROR_MESSAGES.TITLE_MAX_LENGTH),
 });
 
 // Position validation for floor plan tasks

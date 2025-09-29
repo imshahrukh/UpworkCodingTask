@@ -49,13 +49,13 @@ const TaskDetailHeader: React.FC<TaskDetailHeaderProps> = ({
     <div className="flex-shrink-0 p-6 border-b border-slate-200 bg-gradient-to-r from-white to-slate-50">
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-blue-100 rounded-lg">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="p-2.5 bg-blue-100 rounded-lg flex-shrink-0">
               <ClipboardList className="w-5 h-5 text-blue-600" />
             </div>
             <div className="flex-1 min-w-0">
               <h3 className="text-xl font-bold text-slate-900 truncate">{task.title}</h3>
-              <div className="flex items-center gap-2 mt-1">
+              <div className="flex items-center gap-2 mt-2">
                 <Badge variant={getBadgeVariant()}>
                   {getBadgeText()}
                 </Badge>
@@ -63,21 +63,21 @@ const TaskDetailHeader: React.FC<TaskDetailHeaderProps> = ({
             </div>
           </div>
           
-          <div className="flex items-center gap-4 text-sm text-slate-500">
-            <div className="flex items-center gap-1">
-              <Calendar className="w-4 h-4" />
+          <div className="flex items-center gap-6 text-sm text-slate-500">
+            <div className="flex items-center gap-1.5">
+              <Calendar className="w-4 h-4 flex-shrink-0" />
               <span>Created {new Date(task.createdAt).toLocaleDateString()}</span>
             </div>
             {task.position && (
-              <div className="flex items-center gap-1">
-                <MapPin className="w-4 h-4" />
+              <div className="flex items-center gap-1.5">
+                <MapPin className="w-4 h-4 flex-shrink-0" />
                 <span>Positioned</span>
               </div>
             )}
           </div>
         </div>
         
-        <div className="flex space-x-2 ml-4">
+        <div className="flex items-center space-x-2 ml-6">
           <Button
             onClick={() => onEdit(!isEditing)}
             variant={isEditing ? 'danger' : 'primary'}

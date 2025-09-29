@@ -1,6 +1,7 @@
 import React from 'react';
 import { FieldArray } from 'formik';
 import { ChecklistItemStatus } from '../../db/schema';
+import { CHECKLIST_STATUS } from '../../constants/status';
 import { v4 as uuidv4 } from 'uuid';
 import ChecklistItem from './ChecklistItem';
 import Button from '../ui/Button';
@@ -16,7 +17,7 @@ const ChecklistSection: React.FC<ChecklistSectionProps> = ({ values }) => {
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold text-gray-900">Checklist Items</h2>
         <span className="text-sm text-gray-500">
-          {(values.checklist || []).filter((item: any) => item.status === 'DONE').length} of {(values.checklist || []).length} completed
+          {(values.checklist || []).filter((item: any) => item.status === CHECKLIST_STATUS.DONE).length} of {(values.checklist || []).length} completed
         </span>
       </div>
 
@@ -37,7 +38,7 @@ const ChecklistSection: React.FC<ChecklistSectionProps> = ({ values }) => {
               onClick={() => push({
                 id: uuidv4(),
                 text: '',
-                status: 'NOT_STARTED' as ChecklistItemStatus,
+                status: CHECKLIST_STATUS.NOT_STARTED as ChecklistItemStatus,
                 createdAt: new Date().toISOString(),
                 updatedAt: new Date().toISOString(),
               })}

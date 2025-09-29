@@ -5,6 +5,7 @@ import { getRxStorageDexie } from 'rxdb/plugins/storage-dexie';
 import { userSchema, taskSchema, ChecklistItem, UserDoc, TaskDoc, ChecklistItemStatus } from './schema';
 import { v4 as uuidv4 } from 'uuid';
 import { Observable } from 'rxjs';
+import { DEFAULT_CHECKLIST_ITEMS } from '../constants/validation';
 
 // Type definitions for RxDB (simplified)
 type RxDocument<T> = {
@@ -102,22 +103,13 @@ export async function addTask(
   const id = uuidv4();
   const now = new Date().toISOString();
   
-  const defaultChecklist: ChecklistItem[] = [
-    {
-      id: uuidv4(),
-      text: 'Initial inspection',
-      status: 'NOT_STARTED' as ChecklistItemStatus,
-      createdAt: now,
-      updatedAt: now
-    },
-    {
-      id: uuidv4(),
-      text: 'Material verification',
-      status: 'NOT_STARTED' as ChecklistItemStatus,
-      createdAt: now,
-      updatedAt: now
-    }
-  ];
+  const defaultChecklist: ChecklistItem[] = DEFAULT_CHECKLIST_ITEMS.map(item => ({
+    id: uuidv4(),
+    text: item.text,
+    status: item.status,
+    createdAt: now,
+    updatedAt: now
+  }));
   
   const taskData: TaskDoc = {
     id,

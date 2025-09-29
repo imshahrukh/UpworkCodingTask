@@ -1,5 +1,5 @@
 // Type definition for RxDB schema
-type RxJsonSchema<T = any> = {
+type RxJsonSchema = {
   title: string;
   version: number;
   primaryKey: string;
@@ -8,11 +8,7 @@ type RxJsonSchema<T = any> = {
   required: string[];
 };
 
-export const userSchema: RxJsonSchema<{
-  id: string;
-  name: string;
-  createdAt: string;
-}> = {
+export const userSchema: RxJsonSchema = {
   title: 'user schema',
   version: 0,
   primaryKey: 'id',
@@ -44,17 +40,7 @@ export type ChecklistItem = {
   updatedAt: string;
 };
 
-export const taskSchema: RxJsonSchema<{
-  id: string;
-  userId: string;
-  title: string;
-  description?: string;
-  position?: { x: number; y: number };
-  checklist: ChecklistItem[];
-  createdAt: string;
-  updatedAt: string;
-  isBlocked: boolean;
-}> = {
+export const taskSchema: RxJsonSchema = {
   title: 'task schema',
   version: 0,
   primaryKey: 'id',

@@ -21,7 +21,7 @@ const TaskDetailContent: React.FC<TaskDetailContentProps> = ({
 }) => {
   return (
     <div 
-      className="flex-1 overflow-y-auto p-6 min-h-0"
+      className="flex-1 overflow-y-auto p-6 min-h-0 pb-8"
       style={{
         scrollbarWidth: 'thin',
         scrollbarColor: '#cbd5e1 #f1f5f9'

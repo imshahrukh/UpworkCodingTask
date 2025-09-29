@@ -120,7 +120,7 @@ const PlanView: React.FC = () => {
 
       {/* Main Content */}
       <div className="flex-1 flex overflow-hidden">
-        {/* Left Sidebar - Task Panel */}
+        {/*  Task Panel */}
                 {showTaskList && (
           <TaskSidebar
             tasks={tasks}
@@ -134,7 +134,7 @@ const PlanView: React.FC = () => {
           />
         )}
 
-        {/* Center - Floor Plan */}
+        {/* Floor Plan */}
         <FloorPlanView
           tasks={tasks}
           selectedTask={selectedTask}
@@ -143,7 +143,7 @@ const PlanView: React.FC = () => {
           onTaskSelect={handleTaskSelect}
         />
 
-        {/* Right Sidebar - Task Details */}
+        {/* Task Details */}
         <TaskDetailSidebar
           selectedTask={selectedTask}
           isEditing={isEditingTask}

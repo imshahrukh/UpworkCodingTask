@@ -30,11 +30,11 @@ const Select: React.FC<SelectProps> = ({
 }) => {
   const selectId = id || `select-${Math.random().toString(36).substr(2, 9)}`;
   
-  const baseClasses = 'px-4 py-3 border rounded-lg focus:ring-2 focus:border-transparent transition-colors bg-white';
+  const baseClasses = 'px-4 py-2.5 border rounded-lg focus:ring-2 focus:border-transparent transition-colors bg-white text-sm appearance-none cursor-pointer';
   const stateClasses = error 
     ? 'border-red-300 focus:ring-red-500' 
-    : 'border-gray-300 focus:ring-blue-500';
-  const iconClasses = Icon ? 'pl-10' : '';
+    : 'border-gray-300 focus:ring-blue-500 hover:border-gray-400';
+  const iconClasses = Icon ? 'pl-10 pr-8' : 'pr-8';
   const widthClass = fullWidth ? 'w-full' : '';
 
   const classes = `${baseClasses} ${stateClasses} ${iconClasses} ${widthClass} ${className}`.trim();
@@ -49,10 +49,17 @@ const Select: React.FC<SelectProps> = ({
       
       <div className="relative">
         {Icon && (
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <Icon className="h-4 w-4 text-gray-400" />
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-10">
+            <Icon className="h-4 w-4 text-gray-400 flex-shrink-0" />
           </div>
         )}
+        
+        {/* Custom dropdown arrow */}
+        <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none z-10">
+          <svg className="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
         
         <select
           id={selectId}

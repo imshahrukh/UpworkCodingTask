@@ -1,6 +1,7 @@
 import React, { memo, useMemo } from 'react';
 import { TaskDoc } from '../../db/schema';
 import { getStatusColor, getStatusText } from '../../utils/taskHelpers';
+import { CHECKLIST_STATUS } from '../../constants/status';
 import { XCircle, CheckCircle2, Activity } from 'lucide-react';
 
 interface TaskMarkerProps {
@@ -14,12 +15,11 @@ const TaskMarker: React.FC<TaskMarkerProps> = memo(({
   isSelected,
   onClick
 }) => {
-  // Memoize expensive calculations (must be called before early return)
   const markerData = useMemo(() => {
     if (!task.position) return null;
     
     const statusColor = getStatusColor(task);
-    const completedCount = task.checklist.filter(item => item.status === 'DONE').length;
+    const completedCount = task.checklist.filter(item => item.status === CHECKLIST_STATUS.DONE).length;
     const isCompleted = completedCount === task.checklist.length && task.checklist.length > 0;
     const statusText = getStatusText(task);
     
@@ -49,7 +49,6 @@ const TaskMarker: React.FC<TaskMarkerProps> = memo(({
         }`}
         onClick={onClick}
       >
-        {/* Task Status Icon */}
         <div className="absolute inset-0 flex items-center justify-center">
           {task.isBlocked ? (
             <XCircle className="w-3 h-3 text-white" />
@@ -61,7 +60,6 @@ const TaskMarker: React.FC<TaskMarkerProps> = memo(({
         </div>
       </div>
       
-      {/* Tooltip - Fixed positioning */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 bg-slate-900 text-white px-3 py-2 rounded-lg text-xs opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none z-[100] shadow-xl min-w-max">
         <div className="font-semibold text-white truncate max-w-[200px]">{task.title}</div>
         <div className="text-slate-300 mt-1 flex items-center gap-2 flex-wrap">
@@ -69,7 +67,6 @@ const TaskMarker: React.FC<TaskMarkerProps> = memo(({
           <span>•</span>
           <span>{markerData.checklistLength} items</span>
         </div>
-        {/* Arrow */}
         <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-slate-900"></div>
       </div>
     </div>

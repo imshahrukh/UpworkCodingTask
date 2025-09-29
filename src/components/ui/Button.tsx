@@ -1,5 +1,6 @@
 import React from 'react';
 import { LucideIcon } from 'lucide-react';
+import { BUTTON_VARIANTS, BUTTON_SIZES } from '../../constants/ui';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'danger' | 'ghost';
@@ -24,22 +25,11 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   const baseClasses = 'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
   
-  const variantClasses = {
-    primary: 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500 shadow-sm hover:shadow-md',
-    secondary: 'bg-gray-600 text-white hover:bg-gray-700 focus:ring-gray-500 shadow-sm hover:shadow-md',
-    danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500 shadow-sm hover:shadow-md',
-    ghost: 'text-slate-600 hover:text-slate-700 hover:bg-slate-100 focus:ring-slate-500 border border-slate-200 hover:border-slate-300'
-  };
-
-  const sizeClasses = {
-    sm: 'px-3 py-2 text-sm',
-    md: 'px-4 py-2 text-sm',
-    lg: 'px-6 py-3 text-base'
-  };
-
+  const variantClasses = BUTTON_VARIANTS[variant];
+  const sizeClasses = children ? BUTTON_SIZES[size].withText : BUTTON_SIZES[size].iconOnly;
   const widthClass = fullWidth ? 'w-full' : '';
 
-  const classes = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${widthClass} ${className}`.trim();
+  const classes = `${baseClasses} ${variantClasses} ${sizeClasses} ${widthClass} ${className}`.trim();
 
   return (
     <button
@@ -57,9 +47,13 @@ const Button: React.FC<ButtonProps> = ({
         </>
       ) : (
         <>
-          {Icon && iconPosition === 'left' && <Icon className="w-4 h-4 mr-2" />}
+          {Icon && iconPosition === 'left' && (
+            <Icon className={`w-4 h-4 ${children ? 'mr-2' : ''}`} />
+          )}
           {children}
-          {Icon && iconPosition === 'right' && <Icon className="w-4 h-4 ml-2" />}
+          {Icon && iconPosition === 'right' && (
+            <Icon className={`w-4 h-4 ${children ? 'ml-2' : ''}`} />
+          )}
         </>
       )}
     </button>
