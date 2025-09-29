@@ -12,7 +12,6 @@ interface TaskStore {
   error: string | null;
   subscription: Subscription | null;
   
-  // Actions
   setTasks: (tasks: Task[]) => void;
   setSelectedTask: (task: Task | null) => void;
   setLoading: (loading: boolean) => void;
@@ -42,7 +41,6 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
   subscribeToTasks: (userId) => {
     const { subscription } = get();
     
-    // Unsubscribe from previous subscription if exists
     if (subscription) {
       subscription.unsubscribe();
     }
@@ -55,7 +53,6 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
         
         newSubscription = observable.subscribe({
           next: (tasks: Task[]) => {
-            // Clean the tasks data to ensure no circular references
             const cleanTasks = tasks.map(task => ({
               id: task.id,
               userId: task.userId,

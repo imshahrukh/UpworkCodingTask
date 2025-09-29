@@ -4,7 +4,6 @@ import Login from '../components/Login';
 import PlanView from '../components/PlanView';
 import { useUserStore } from '../store/userStore';
 
-// Route configuration object
 const ROUTES_CONFIG = {
   public: [
     {
@@ -73,7 +72,6 @@ const Router: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Public Routes */}
         {ROUTES_CONFIG.public.map((route) => (
           <Route
             key={route.path}
@@ -86,7 +84,6 @@ const Router: React.FC = () => {
           />
         ))}
         
-        {/* Protected Routes */}
         {ROUTES_CONFIG.protected.map((route) => (
           <Route
             key={route.path}

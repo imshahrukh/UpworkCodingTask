@@ -154,5 +154,6 @@ docker-compose up --build
 9. **Task Dependencies**: Add task relationship management
 
 ## 🎥 Demo Video
+1. https://www.loom.com/share/edbb3a8cd5b24fd7b912302b4845c125
+2. https://www.loom.com/share/64a36b89eebd49728c422f602190558f
 
-[Link to demo video explaining the code and functionality]

@@ -1,6 +1,6 @@
 import React from 'react';
-import { ClipboardList, Target } from 'lucide-react';
-import Card from '../ui/Card';
+import { ClipboardList } from 'lucide-react';
+// import Card from '../ui/Card';
 
 const EmptyTaskDetail: React.FC = () => {
   return (
@@ -16,7 +16,7 @@ const EmptyTaskDetail: React.FC = () => {
           <p className="text-slate-600 mb-1">Select a task to view detailed information</p>
           <p className="text-sm text-slate-500">Click on task markers in the floor plan or items in the task list</p>
           
-          <Card padding="md" className="mt-6 bg-blue-50 border-blue-200">
+          {/* <Card padding="md" className="mt-6 bg-blue-50 border-blue-200">
             <div className="flex items-center gap-2 text-blue-700 text-sm">
               <Target className="w-4 h-4" />
               <span className="font-medium">Pro Tip:</span>
@@ -24,7 +24,7 @@ const EmptyTaskDetail: React.FC = () => {
             <p className="text-blue-600 text-sm mt-1">
               Use the interactive floor plan to visualize and manage your construction tasks efficiently
             </p>
-          </Card>
+          </Card> */}
         </div>
       </div>
     </div>

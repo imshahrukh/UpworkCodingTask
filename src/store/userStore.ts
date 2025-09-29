@@ -24,9 +24,9 @@ export const useUserStore = create<UserStore>()(
       setError: (error) => set({ error }),
     }),
     {
-      name: 'user-storage', // localStorage key
+      name: 'user-storage',
       partialize: (state) => ({ 
-        currentUser: state.currentUser // Only persist currentUser, not loading states
+        currentUser: state.currentUser
       }),
     }
   )

@@ -1,7 +1,6 @@
 import { ChecklistItemStatus } from '../db/schema';
 import { CHECKLIST_STATUS } from './status';
 
-// Database Default Values
 export const DEFAULT_CHECKLIST_ITEMS = [
   {
     text: 'Initial inspection',
@@ -13,7 +12,6 @@ export const DEFAULT_CHECKLIST_ITEMS = [
   }
 ] as const;
 
-// Validation Constants
 export const VALIDATION_LIMITS = {
   USER_NAME: {
     MIN_LENGTH: 2,
@@ -37,7 +35,6 @@ export const VALIDATION_LIMITS = {
   }
 } as const;
 
-// Status Values
 export const CHECKLIST_STATUSES = [
   CHECKLIST_STATUS.NOT_STARTED,
   CHECKLIST_STATUS.IN_PROGRESS, 
@@ -46,7 +43,6 @@ export const CHECKLIST_STATUSES = [
   CHECKLIST_STATUS.DONE
 ] as ChecklistItemStatus[];
 
-// Task Status Types
 export const TASK_STATUS_TYPES = [
   'all',
   'in-progress',
@@ -60,7 +56,6 @@ export const SORT_TYPES = [
   'status'
 ] as const;
 
-// Error Messages
 export const ERROR_MESSAGES = {
   REQUIRED: 'This field is required',
   NAME_REQUIRED: 'Name is required',

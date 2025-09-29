@@ -26,7 +26,6 @@ export const getTaskProgressStats = (task: TaskDoc) => {
   const inProgressItems = task.checklist.filter(item => item.status === CHECKLIST_STATUS.IN_PROGRESS).length;
   const totalItems = task.checklist.length;
   
-  // Calculate progress: completed items + 50% of in-progress items
   const progress = totalItems > 0 
     ? Math.round(((completedItems + (inProgressItems * 0.5)) / totalItems) * 100)
     : 0;

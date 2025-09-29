@@ -5,7 +5,6 @@ import {
   CHECKLIST_STATUSES 
 } from '../constants/validation';
 
-// User validation schema
 export const userLoginSchema = yup.object({
   name: yup
     .string()
@@ -16,7 +15,6 @@ export const userLoginSchema = yup.object({
     .matches(VALIDATION_LIMITS.USER_NAME.PATTERN, ERROR_MESSAGES.NAME_PATTERN),
 });
 
-// Task validation schema
 export const taskSchema = yup.object({
   title: yup
     .string()
@@ -31,7 +29,6 @@ export const taskSchema = yup.object({
     .nullable(),
 });
 
-// Checklist item validation schema
 export const checklistItemSchema = yup.object({
   text: yup
     .string()
@@ -45,7 +42,6 @@ export const checklistItemSchema = yup.object({
     .required(ERROR_MESSAGES.STATUS_REQUIRED),
 });
 
-// Task form validation schema (includes checklist)
 export const taskFormSchema = yup.object({
   title: yup
     .string()
@@ -65,7 +61,6 @@ export const taskFormSchema = yup.object({
     .max(VALIDATION_LIMITS.CHECKLIST.MAX_ITEMS, ERROR_MESSAGES.CHECKLIST_MAX_ITEMS),
 });
 
-// Quick task creation schema (for plan view)
 export const quickTaskSchema = yup.object({
   title: yup
     .string()
@@ -75,7 +70,6 @@ export const quickTaskSchema = yup.object({
     .max(VALIDATION_LIMITS.TASK_TITLE.MAX_LENGTH, ERROR_MESSAGES.TITLE_MAX_LENGTH),
 });
 
-// Position validation for floor plan tasks
 export const positionSchema = yup.object({
   x: yup
     .number()
@@ -89,7 +83,6 @@ export const positionSchema = yup.object({
     .required('Y coordinate is required'),
 });
 
-// Export types for form values
 export type UserLoginFormValues = yup.InferType<typeof userLoginSchema>;
 export type TaskFormValues = yup.InferType<typeof taskFormSchema>;
 export type ChecklistItemFormValues = yup.InferType<typeof checklistItemSchema>;
