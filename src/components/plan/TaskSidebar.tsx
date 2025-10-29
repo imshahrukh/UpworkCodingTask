@@ -3,14 +3,14 @@ import { TaskDoc } from '../../db/schema';
 import { FilterType, SortType } from '../../hooks/useTaskFiltering';
 import { FILTER_OPTIONS, SORT_OPTIONS } from '../../utils/statusHelpers';
 import { CHECKLIST_STATUS } from '../../constants/status';
-import { 
-  ClipboardList, 
-  Filter, 
-  SortDesc, 
-  BarChart3, 
-  XCircle, 
-  Activity, 
-  CheckCircle2 
+import {
+  ClipboardList,
+  Filter,
+  SortDesc,
+  BarChart3,
+  XCircle,
+  Activity,
+  CheckCircle2
 } from 'lucide-react';
 import Card from '../ui/Card';
 import Select from '../ui/Select';
@@ -55,10 +55,10 @@ const TaskSidebar: React.FC<TaskSidebarProps> = ({
     if (selectedTask && selectedTaskRef.current && scrollContainerRef.current) {
       const selectedElement = selectedTaskRef.current;
       const container = scrollContainerRef.current;
-      
+
       const containerRect = container.getBoundingClientRect();
       const elementRect = selectedElement.getBoundingClientRect();
-      
+
       const isVisible = (
         elementRect.top >= containerRect.top &&
         elementRect.bottom <= containerRect.bottom
@@ -68,9 +68,9 @@ const TaskSidebar: React.FC<TaskSidebarProps> = ({
         const elementOffsetTop = selectedElement.offsetTop - 200;
         const containerHeight = container.clientHeight;
         const elementHeight = selectedElement.clientHeight;
-        
+
         const scrollTo = elementOffsetTop - (containerHeight / 2) + (elementHeight / 2);
-        
+
         container.scrollTo({
           top: scrollTo,
           behavior: 'smooth'
@@ -123,7 +123,7 @@ const TaskSidebar: React.FC<TaskSidebarProps> = ({
                 <div className="text-2xl font-bold text-slate-900 mb-1">{tasks.length}</div>
                 <div className="text-sm text-slate-600 font-medium">Total</div>
               </div>
-              
+
               <div className="text-center">
                 <div className="flex items-center justify-center mb-2">
                   <XCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
@@ -131,7 +131,7 @@ const TaskSidebar: React.FC<TaskSidebarProps> = ({
                 <div className="text-2xl font-bold text-red-600 mb-1">{blockedCount}</div>
                 <div className="text-sm text-red-600 font-medium">Blocked</div>
               </div>
-              
+
               <div className="text-center">
                 <div className="flex items-center justify-center mb-2">
                   <Activity className="w-5 h-5 text-blue-500 flex-shrink-0" />
@@ -139,7 +139,7 @@ const TaskSidebar: React.FC<TaskSidebarProps> = ({
                 <div className="text-2xl font-bold text-blue-600 mb-1">{activeCount}</div>
                 <div className="text-sm text-blue-600 font-medium">Active</div>
               </div>
-              
+
               <div className="text-center">
                 <div className="flex items-center justify-center mb-2">
                   <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
@@ -152,9 +152,9 @@ const TaskSidebar: React.FC<TaskSidebarProps> = ({
         </div>
       </div>
 
-      <div 
+      <div
         ref={scrollContainerRef}
-        className="flex-1 overflow-y-auto bg-slate-50 min-h-0" 
+        className="flex-1 overflow-y-auto bg-slate-50 min-h-0"
         style={{
           scrollbarWidth: 'thin',
           scrollbarColor: '#cbd5e1 #f1f5f9'

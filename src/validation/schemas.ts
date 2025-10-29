@@ -15,21 +15,7 @@ export const userLoginSchema = yup.object({
     .matches(VALIDATION_LIMITS.USER_NAME.PATTERN, ERROR_MESSAGES.NAME_PATTERN),
 });
 
-export const taskSchema = yup.object({
-  title: yup
-    .string()
-    .trim()
-    .required(ERROR_MESSAGES.TITLE_REQUIRED)
-    .min(VALIDATION_LIMITS.TASK_TITLE.MIN_LENGTH, ERROR_MESSAGES.TITLE_MIN_LENGTH)
-    .max(VALIDATION_LIMITS.TASK_TITLE.MAX_LENGTH, ERROR_MESSAGES.TITLE_MAX_LENGTH),
-  description: yup
-    .string()
-    .trim()
-    .max(VALIDATION_LIMITS.TASK_DESCRIPTION.MAX_LENGTH, ERROR_MESSAGES.DESCRIPTION_MAX_LENGTH)
-    .nullable(),
-});
-
-export const checklistItemSchema = yup.object({
+const checklistItemSchema = yup.object({
   text: yup
     .string()
     .trim()
@@ -70,21 +56,6 @@ export const quickTaskSchema = yup.object({
     .max(VALIDATION_LIMITS.TASK_TITLE.MAX_LENGTH, ERROR_MESSAGES.TITLE_MAX_LENGTH),
 });
 
-export const positionSchema = yup.object({
-  x: yup
-    .number()
-    .min(0, 'X coordinate must be non-negative')
-    .max(1, 'X coordinate must not exceed 1')
-    .required('X coordinate is required'),
-  y: yup
-    .number()
-    .min(0, 'Y coordinate must be non-negative')
-    .max(1, 'Y coordinate must not exceed 1')
-    .required('Y coordinate is required'),
-});
-
 export type UserLoginFormValues = yup.InferType<typeof userLoginSchema>;
 export type TaskFormValues = yup.InferType<typeof taskFormSchema>;
-export type ChecklistItemFormValues = yup.InferType<typeof checklistItemSchema>;
 export type QuickTaskFormValues = yup.InferType<typeof quickTaskSchema>;
-export type PositionFormValues = yup.InferType<typeof positionSchema>;
