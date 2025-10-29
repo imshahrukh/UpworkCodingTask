@@ -109,7 +109,7 @@ const Router: React.FC = () => {
             }
           />
         ))}
-      </Routes>
+      </Routes>¬
     </BrowserRouter>
   );
 };

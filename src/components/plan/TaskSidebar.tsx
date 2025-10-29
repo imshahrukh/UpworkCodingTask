@@ -167,7 +167,7 @@ const TaskSidebar: React.FC<TaskSidebarProps> = ({
             description="Try adjusting your filters"
           />
         ) : (
-          <div className="p-3 space-y-2">
+          <div className="p-3 pb-24 space-y-2">
             {filteredTasks.map((task) => (
               <TaskListItem
                 key={task.id}

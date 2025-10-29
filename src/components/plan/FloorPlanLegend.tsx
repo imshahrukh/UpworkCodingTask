@@ -1,6 +1,6 @@
 import React from 'react';
 import { Target } from 'lucide-react';
-import { STATUS_CONFIG } from '../../constants/status';
+import { CHECKLIST_STATUS, STATUS_CONFIG } from '../../constants/status';
 
 interface LegendItemProps {
   item: {
@@ -33,12 +33,13 @@ const FloorPlanLegend: React.FC = () => {
   const legendItems = Object.entries(STATUS_CONFIG).map(([status, config]) => ({
     status: status as keyof typeof STATUS_CONFIG,
     label: config.label,
-    color: status === 'NOT_STARTED' ? 'bg-slate-500' :
-           status === 'IN_PROGRESS' ? 'bg-blue-500' :
-           status === 'DONE' ? 'bg-green-500' :
-           status === 'BLOCKED' ? 'bg-red-500' :
-           'bg-yellow-500',
-    icon: config.icon
+    color: status === CHECKLIST_STATUS.NOT_STARTED ? 'bg-slate-500' :
+           status === CHECKLIST_STATUS.IN_PROGRESS ? 'bg-blue-500' :
+           status === CHECKLIST_STATUS.DONE ? 'bg-green-500' :
+           status === CHECKLIST_STATUS.BLOCKED ? 'bg-red-500' :
+           CHECKLIST_STATUS.FINAL_CHECK_AWAITING ? 'bg-yellow-500' :
+           'bg-gray-500',
+    icon: config.icon as React.ComponentType<{ className?: string }>
   }));
 
   return (

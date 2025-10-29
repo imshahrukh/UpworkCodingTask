@@ -88,10 +88,6 @@ const PlanView: React.FC = () => {
       // Update local state
       const updatedTask = { ...selectedTask, ...updates };
       setSelectedTask(updatedTask);
-      
-      // Update store
-      const { updateTaskInStore } = useTaskStore.getState();
-      updateTaskInStore(selectedTask.id, updates);
 
       setIsEditingTask(false);
     } catch (error) {

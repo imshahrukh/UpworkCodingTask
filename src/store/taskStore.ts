@@ -7,36 +7,19 @@ export type Task = TaskDoc;
 
 interface TaskStore {
   tasks: Task[];
-  selectedTask: Task | null;
   isLoading: boolean;
   error: string | null;
   subscription: Subscription | null;
   
-  setTasks: (tasks: Task[]) => void;
-  setSelectedTask: (task: Task | null) => void;
-  setLoading: (loading: boolean) => void;
-  setError: (error: string | null) => void;
   subscribeToTasks: (userId: string) => void;
   unsubscribeFromTasks: () => void;
-  addTaskToStore: (task: Task) => void;
-  updateTaskInStore: (taskId: string, updates: Partial<Task>) => void;
-  removeTaskFromStore: (taskId: string) => void;
 }
 
 export const useTaskStore = create<TaskStore>((set, get) => ({
       tasks: [],
-      selectedTask: null,
       isLoading: false,
       error: null,
       subscription: null,
-
-      setTasks: (tasks) => set({ tasks, error: null }),
-      
-      setSelectedTask: (task) => set({ selectedTask: task }),
-      
-      setLoading: (loading) => set({ isLoading: loading }),
-      
-      setError: (error) => set({ error }),
 
   subscribeToTasks: (userId) => {
     const { subscription } = get();
@@ -103,37 +86,5 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
       subscription.unsubscribe();
       set({ subscription: null });
     }
-  },
-
-  addTaskToStore: (task) => {
-    const { tasks } = get();
-    set({ tasks: [task, ...tasks] });
-  },
-
-  updateTaskInStore: (taskId, updates) => {
-    const { tasks, selectedTask } = get();
-    const updatedTasks = tasks.map(task =>
-      task.id === taskId ? { ...task, ...updates } : task
-    );
-    
-    const updatedSelectedTask = selectedTask?.id === taskId
-      ? { ...selectedTask, ...updates }
-      : selectedTask;
-    
-    set({ 
-      tasks: updatedTasks,
-      selectedTask: updatedSelectedTask
-    });
-  },
-
-  removeTaskFromStore: (taskId) => {
-    const { tasks, selectedTask } = get();
-    const filteredTasks = tasks.filter(task => task.id !== taskId);
-    const updatedSelectedTask = selectedTask?.id === taskId ? null : selectedTask;
-    
-    set({ 
-      tasks: filteredTasks,
-      selectedTask: updatedSelectedTask
-    });
   },
 }));

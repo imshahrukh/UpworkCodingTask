@@ -1,5 +1,4 @@
 import { useState, useCallback } from 'react';
-import { useTaskStore } from '../store/taskStore';
 import { addTask, updateTask, deleteTask } from '../db/db';
 import { TaskFormValues } from '../validation/schemas';
 import { ChecklistItem } from '../db/schema';
@@ -67,10 +66,7 @@ export const useTaskOperations = () => {
       setIsDeleting(taskId);
       await deleteTask(taskId);
       
-      // Update store
-      const { removeTaskFromStore } = useTaskStore.getState();
-      removeTaskFromStore(taskId);
-      
+      // RxDB subscription will automatically update the store
       return true;
     } catch (error) {
       console.error('Error deleting task:', error);
